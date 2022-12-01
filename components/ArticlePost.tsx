@@ -1,10 +1,10 @@
-import { BlogPostProps } from '@/libs/type';
+import { ArticlePostProps } from '@/libs/types';
 import Link from 'next/link';
 
-export default function BlogPost({ slug, title, excerpt }: BlogPostProps) {
+export default function ArticlePost({ slug, title, excerpt }: ArticlePostProps) {
   return (
     <Link
-      href={`/blog/${slug}`}
+      href={`/articles/${slug}`}
       className="border-grey-200 mb-8 w-full rounded border bg-white p-4 transition-all hover:scale-[1.01] dark:border-gray-800 dark:bg-gray-900"
     >
       <div className="w-full">

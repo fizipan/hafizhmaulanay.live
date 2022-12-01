@@ -2,7 +2,7 @@ import { useRouter } from 'next/router';
 import Link from 'next/link';
 import cx from 'classnames';
 
-import { NavItemProps } from '@/libs/type';
+import { NavItemProps } from '@/libs/types';
 
 export default function NavItem({ href, text }: NavItemProps) {
   const router = useRouter();

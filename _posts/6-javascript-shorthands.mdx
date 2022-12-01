@@ -1,0 +1,109 @@
+---
+title: 6 Javascript Shorthands You Need to Know
+date: 2022-07-28
+excerpt: Without shorthand, the code will still work, but if it can be faster, why not. In this article we will discuss 5 javascript shorthands that we often use.
+---
+
+Without shorthand, the code will still work, but if it can be faster, why not. In this article we will discuss 5 javascript shorthands that we often use.
+
+### Destructuring
+
+Avoid defining variables one by one like:
+
+```js
+const email = user.email;
+const name = user.name;
+const bio = user.bio;
+```
+
+This can be more easily done with just like:
+
+```js
+const { email, name, bio } = user;
+```
+
+It's much easier than using this destruction technique. Okay, here is another example of destruction.
+
+```js
+// Long
+const hours = time[0];
+const minutes = time[1];
+const seconds = time[2];
+
+// Short
+const [hours, minutes, seconds] = time;
+```
+
+### Filter Falsy Values
+
+We can use `filter(Boolean)` to get only true | false results.
+
+```js
+// Long
+names.filter((name) => number !== null && number !== undefined);
+
+// Short
+names.filter(Boolean);
+```
+
+### Array Includes
+
+Maybe you often use if statements that are too long, making the code messy.
+
+```js
+// Long
+if (status === 'unpublished' || status === 'preview' || status === 'unlisted') {
+  //
+}
+
+// Short
+['unpublished', 'preview', 'unlisted'].includes(status);
+```
+
+### Optional Chaining
+
+This technique is my favorite technique in using javascript. We can display data without having to worry about the data returning `null`.
+
+```js
+// Long
+if (user && user.experiences && user.experiences[i]) {
+  experience = user.experiences[i].description;
+}
+
+// Short
+experience = user?.experiences?.[i]?.description;
+```
+
+### Default Values
+
+Using the nulllish coalescing technique is more powerful than having to create an if statement.
+
+```js
+// Long
+let name;
+if (user === null || user === undefined) {
+  name = 'Irsyad';
+}
+
+// Short
+const name = user ?? 'Irsyad';
+```
+
+### For Loops
+
+There are many ways to loop, but the usual way you do it might be too long.
+
+```javascript
+for (let i = 0; i < arr.length; i++) {
+  const item = arr[i];
+}
+
+// Short 1
+arr.forEach((item) => {});
+
+// Short 2
+for (let item of arr) {
+}
+```
+
+Hopefully, this article will be useful. The point is, if we can code faster, why be slow. I'm Irsyad, see you in the next article.

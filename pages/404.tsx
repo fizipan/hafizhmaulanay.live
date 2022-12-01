@@ -1,18 +1,19 @@
 import Link from 'next/link';
 
 import Container from '@/components/Container';
+import Meta from '@/components/Meta';
 
 export default function NotFound() {
   return (
     <Container>
-      <div className="items-staryt mx-auto mb-16 flex max-w-2xl flex-col justify-center">
+      <Meta title="404 - Hafizh Maulana Y" />
+      <div className="mx-auto mb-16 flex max-w-2xl flex-col items-start justify-center">
         <h1 className="mb-4 text-3xl font-bold tracking-tight text-black dark:text-white md:text-5xl">
-          451 – Unavailable For Legal Reasons
+          404 – Page Not Found
         </h1>
         <p className="mb-8 text-gray-600 dark:text-gray-400">
-          Why show a generic 404 when I can make it sound mysterious? It seems you've found
-          something that used to exist, or you spelled something wrong. I'm guessing you spelled
-          something wrong. Can you double check that URL?
+          It seems you've found something that used to exist, or you spelled something wrong. I'm
+          guessing you spelled something wrong. Can you double check that URL?
         </p>
         <Link
           href="/"

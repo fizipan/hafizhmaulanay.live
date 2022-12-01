@@ -1,9 +1,18 @@
 import React from 'react';
+import { MDXRemoteSerializeResult } from 'next-mdx-remote';
+
+export interface Articles {
+  slug: string;
+  content: MDXRemoteSerializeResult;
+  title: string;
+  date: string;
+  excerpt: string;
+  coverImage: string;
+}
 
 export interface NavItemProps {
   href: string;
   text: string;
-  children?: React.ReactNode;
 }
 
 export interface ContainerProps {
@@ -16,21 +25,23 @@ export interface ExternalLinkProps {
 }
 
 export interface MetaProps {
-  title: string;
-  description: string;
-  image: string;
-  type: string;
+  title?: string;
+  description?: string;
+  url?: string;
+  image?: string;
+  type?: string;
   date?: string;
 }
 
-export interface BlogPostCardProps {
+export interface ArticlePostCardProps {
   title: string;
   slug: string;
   gradient: string;
 }
 
-export interface BlogPostProps {
+export interface ArticlePostProps {
   title: string;
   slug: string;
   excerpt: string;
+  date?: string;
 }

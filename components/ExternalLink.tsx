@@ -1,4 +1,4 @@
-import { ExternalLinkProps } from '@/libs/type';
+import { ExternalLinkProps } from '@/libs/types';
 
 export default function ExternalLink({ href, children }: ExternalLinkProps) {
   return (
