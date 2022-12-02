@@ -1,0 +1,179 @@
+---
+title: Writing More Readable Code With Scope
+tags:
+  - laravel
+  - tips & tricks
+date: 2022-06-25
+excerpt: In this article, we will discuss some powerful extensions in visual studio code.
+---
+
+Show data with the default properties you want, not only that. Scope can also help us in making our code more readable.
+
+Before we start, I will first show you the difference between before and after.
+
+```php
+// Before
+Article::where('user_id', $request->user())->where('status', ArticleStatus::PUBLISHED)->get();
+
+// After
+Article::query()->wherePublishedAndBelongsToMe()->get();
+```
+
+Since I am modelling with an article, we will assume that there is a status on the article. Like for example `unpublished` and `published`. So if you look at the example above, it just uses an enum from PHP. More or less the enum is like this.
+
+```php
+enum ArticleStatus: int
+{
+    case UNPUBLISHED = 0;
+    case PREVIEW = 1;
+    case PUBLISHED = 2;
+}
+```
+
+Now, open the article model and add 3 methods in it with `scopeNameOfFunction` prefix like:
+
+```php
+use App\Enums\ArticleStatus;
+use Illuminate\Contracts\Database\Query\Builder;
+class Article extends Model
+{
+//...
+public function scopeWherePublished(Builder $builder)
+{
+return $builder->where('status', ArticleStatus::PUBLISHED);
+}
+
+    public function scopeWhereBelongsToMe(Builder $builder)
+    {
+        return $builder->whereBelongsTo(auth()?->user());
+    }
+
+    public function scopeWherePublishedAndBelongsToMe(Builder $builder)
+    {
+        return $builder->wherePublished()->whereBelongsToMe();
+    }
+
+}
+
+```
+
+After that, you can use it like the example above, only for the `scopeWhereBelongsToMe` method there is a little exception. Make sure if you want to use it it is right on the page that has been protected by `middleware auth`. That's just an example, of course you can create whatever you want.
+
+Well for how to use it it's very easy, if we need one that only has `published` status, then we can do it like:
+
+```php
+Article::query()->wherePublished()->get();
+```
+
+And if you want to display everything related to the logged in user and don't care about the status, you can do it like:
+
+```php
+Article::query()->whereBelongsToMe()->get();
+```
+
+And of course, if you want both, it would be like:
+
+```php
+Article::query()->whereBelongsToMe()->wherePublished()->get();
+```
+
+Or put together with the prefix `and` like:
+
+```php
+Article::query()->wherePublishedAndBelongsToMe()->get();
+```
+
+More or less for such `scope` usage. But the scope we did above is still called local scope. Why is that? Because there is actually a way to scope globally. So the scope is applied by default.
+
+### Global Scope
+
+Now we will give you an example. Open your terminal and run the artisan command to create a scope like:
+
+```bash
+php artisan make:scope PublishedScope
+```
+
+After that, it will create us a folder `Scopes` with the file `ArticleScope.php` inside. Look for the file right inside the `app/Models/Scopes/ArticleScope.php` directory. Remember, that this class only contains one method, `apply`, so if you try to create one more method under it, it will error. Because this class itself is implemented with `interface Scope` which contains only 1 method like:
+
+```php
+public function apply(Builder $builder, Model $model);
+```
+
+Now, you can enter the query you want to create right into that `apply` method like:
+
+```php
+class PublishedScope implements Scope
+{
+    public function apply(Builder $builder, Model $model)
+    {
+        return $builder->where('status', ArticleStatus::PUBLISHED)->latest();
+    }
+}
+```
+
+Next you can register that scope globally right on the model that needs it.
+
+```php
+class Article extends Model
+{
+    /**
+     * The "booted" method of the model.
+     *
+     * @return void
+     */
+    protected static function booted()
+    {
+        static::addGlobalScope(new PublishedScope);
+    }
+}
+```
+
+If the user model also needs that scope, then you can also stick it in there like:
+
+```php
+class User extends Model
+{
+    /**
+     * The "booted" method of the model.
+     *
+     * @return void
+     */
+    protected static function booted()
+    {
+        static::addGlobalScope(new PublishedScope);
+    }
+}
+```
+
+### Anonymous Global Scopes
+
+If you don't want to create it outside of the model, you can use an _anonymous global scope_ like:
+
+```php
+class User extends Model
+{
+    protected static function booted()
+    {
+        static::addGlobalScope('published', function (Builder $builder) {
+            $builder->where('status', Article::PUBLISHED);
+        });
+    }
+}
+
+```
+
+### Without Global Scope
+
+Sometimes we don't want to use this scope, for example we want to display all articles regardless of their status. Then it can be prevented by adding a `withoutGlobalScope` method such as:
+
+```php
+Article::withoutGlobalScope(PublishedScope::class)->get();
+```
+
+Or if you are using an _anonymous global scope_ you can directly enter the name like:
+
+```php
+Article::withoutGlobalScope('published')->get();
+```
+
+Hope this article is useful. Until next time 👋🏻
