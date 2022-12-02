@@ -15,11 +15,13 @@ In this example, we will create a _controller_ for `Post`.
 ``php
 Route::resource('posts', PostController::class);
 
-````
 Then, if you list the route specifically on the `posts`, then you should see this.
+
 ```bash
 artisan route:list --name=posts
-...
+```
+
+```bash
 GET|HEAD    posts ...  posts.index › PostController@index
 POST        posts ... posts.store › PostController@store
 GET|HEAD    posts/create ... posts.create › PostController@create
@@ -27,7 +29,7 @@ GET|HEAD    posts/{post} ... posts.show › PostController@show
 PUT|PATCH   posts/{post} ... posts.update › PostController@update
 DELETE      posts/{post} ... posts.destroy › PostController@destroy
 GET|HEAD    posts/{post}/edit ... posts.edit › PostController@edit
-````
+```
 
 Now, then, if you want to create the controller, it's easy by flagging `-model=[]` like `artisan make:controller PostController --model=Post`.
 

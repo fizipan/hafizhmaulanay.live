@@ -45,3 +45,24 @@ export interface ArticlePostProps {
   excerpt: string;
   date?: string;
 }
+
+export interface ImageWithThemeProps {
+  light: string;
+  dark: string;
+  alt: string;
+}
+
+export interface RoundedImageProps {
+  src: string;
+  alt: string;
+}
+
+export interface CalloutProps {
+  emoji: string;
+  children: React.ReactNode;
+}
+
+export interface CustomLinkProps {
+  href: string;
+  children: React.ReactNode;
+}

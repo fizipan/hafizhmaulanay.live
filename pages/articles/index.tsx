@@ -75,10 +75,10 @@ export default function Articles({ articles }: InferGetStaticPropsType<typeof ge
           </>
         )}
         <h3 className="mt-8 mb-4 text-2xl font-bold tracking-tight text-black dark:text-white md:text-4xl">
-          All Posts
+          All Articles
         </h3>
         {!filteredArticlePosts.length && (
-          <p className="mb-4 text-gray-600 dark:text-gray-400">No posts found.</p>
+          <p className="mb-4 text-gray-600 dark:text-gray-400">No articles found.</p>
         )}
         {filteredArticlePosts.map((article) => (
           <ArticlePost
