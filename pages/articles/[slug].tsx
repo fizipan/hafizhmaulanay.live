@@ -43,6 +43,7 @@ export async function getStaticProps({ params }: Params) {
       post: {
         source: mdxSource,
         meta,
+        ...mdxSource,
       },
     },
   };

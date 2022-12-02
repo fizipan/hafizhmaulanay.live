@@ -2,6 +2,7 @@ import path from 'path';
 import fs from 'fs';
 import matter from 'gray-matter';
 import { POSTS_PATH } from './helpers';
+import format from 'date-fns/format';
 
 const getSlugs = () => {
   const paths = fs.readdirSync(POSTS_PATH);
@@ -25,7 +26,7 @@ const getPostFromSlug = (slug: string) => {
       slug,
       excerpt: data.excerpt ?? 'slug',
       title: data.title ?? slug,
-      date: data?.date?.toString(),
+      date: format(new Date(data.date), 'MMMM dd, yyyy'),
     },
   };
 };
