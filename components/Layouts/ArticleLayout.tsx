@@ -36,7 +36,7 @@ export default function ArticleLayout({ children, post }: PropsWithChildren<{ po
             </p>
           </div>
           <p className="min-w-32 mt-2 text-sm text-gray-600 dark:text-gray-400 md:mt-0">
-            estimated {post.readingTime}
+            Estimated {post.readingTime}
           </p>
         </div>
         <div className="prose mt-4 w-full max-w-none dark:prose-dark">{children}</div>
