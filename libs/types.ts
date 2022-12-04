@@ -12,7 +12,7 @@ export interface ArticleMeta {
   date: string;
   excerpt: string;
   slug: string;
-  description?: string;
+  featured: boolean;
 }
 
 // PROPS ---------------------------------------------- //

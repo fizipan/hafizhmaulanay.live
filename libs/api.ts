@@ -27,6 +27,7 @@ const getPostFromSlug = (slug: string) => {
       date: format(new Date(data.date), 'MMMM dd, yyyy'),
       excerpt: data.excerpt ?? 'slug',
       slug,
+      featured: data.featured ?? false,
     },
   };
 };
@@ -42,4 +43,8 @@ const getArticles = () => {
     .reverse();
 };
 
-export { getArticles, getSlugs, getPostFromSlug };
+const getFeaturedArticles = () => {
+  return getArticles().filter((article) => article.meta.featured);
+};
+
+export { getArticles, getSlugs, getPostFromSlug, getFeaturedArticles };

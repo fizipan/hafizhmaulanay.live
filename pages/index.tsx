@@ -8,9 +8,18 @@ import ArticlePost from '@/components/ArticlePost';
 import Meta from '@/components/Meta';
 
 import { ArticleMeta } from '@/libs/types';
-import { getArticles } from '@/libs/api';
+import { getArticles, getFeaturedArticles } from '@/libs/api';
 
-export default function Home({ articles }: InferGetStaticPropsType<typeof getStaticProps>) {
+export default function Home({
+  articles,
+  featuredArticles,
+}: InferGetStaticPropsType<typeof getStaticProps>) {
+  const gradientColor: string[] = [
+    'from-[#D8B4FE] to-[#818CF8]',
+    'from-[#6EE7B7] via-[#3B82F6] to-[#9333EA]',
+    'from-[#FDE68A] via-[#FCA5A5] to-[#FECACA]',
+  ];
+
   return (
     <Container>
       <Meta />
@@ -45,21 +54,14 @@ export default function Home({ articles }: InferGetStaticPropsType<typeof getSta
           Featured Articles
         </h3>
         <div className="flex flex-col gap-6 md:flex-row">
-          <ArticlePostCard
-            title="Everything I Know About Style Guides, Design Systems, and Component Libraries"
-            slug="style-guides-component-libraries-design-systems"
-            gradient="from-[#D8B4FE] to-[#818CF8]"
-          />
-          <ArticlePostCard
-            title="Rust Is The Future of JavaScript Infrastructure"
-            slug="rust"
-            gradient="from-[#6EE7B7] via-[#3B82F6] to-[#9333EA]"
-          />
-          <ArticlePostCard
-            title="Past, Present, and Future of React State Management"
-            slug="react-state-management"
-            gradient="from-[#FDE68A] via-[#FCA5A5] to-[#FECACA]"
-          />
+          {featuredArticles.map((article, index) => (
+            <ArticlePostCard
+              key={article.slug}
+              title={article.title}
+              slug={article.slug}
+              gradient={gradientColor[index]}
+            />
+          ))}
         </div>
 
         <h3 className="mb-4 mt-16 text-2xl font-bold tracking-tight text-black dark:text-white md:text-4xl">
@@ -107,9 +109,14 @@ export async function getStaticProps() {
     .slice(0, 9)
     .map((article) => article.meta);
 
+  const featuredArticles: ArticleMeta[] = getFeaturedArticles()
+    .slice(0, 3)
+    .map((article) => article.meta);
+
   return {
     props: {
       articles,
+      featuredArticles,
     },
   };
 }

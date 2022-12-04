@@ -6,9 +6,12 @@ import ArticlePost from '@/components/ArticlePost';
 import Meta from '@/components/Meta';
 
 import { ArticleMeta } from '@/libs/types';
-import { getArticles } from '@/libs/api';
+import { getArticles, getFeaturedArticles } from '@/libs/api';
 
-export default function Articles({ articles }: InferGetStaticPropsType<typeof getStaticProps>) {
+export default function Articles({
+  articles,
+  featuredArticles,
+}: InferGetStaticPropsType<typeof getStaticProps>) {
   const [searchValue, setSearchValue] = useState('');
   const filteredArticlePosts = articles.filter((article: ArticleMeta) =>
     article.title.toLowerCase().includes(searchValue.toLowerCase())
@@ -57,21 +60,14 @@ export default function Articles({ articles }: InferGetStaticPropsType<typeof ge
             <h3 className="mt-8 mb-4 text-2xl font-bold tracking-tight text-black dark:text-white md:text-4xl">
               Most Popular
             </h3>
-            <ArticlePost
-              title="Rust Is The Future of JavaScript Infrastructure"
-              excerpt="Why is Rust being used to replace parts of the JavaScript web ecosystem like minification (Terser), transpilation (Babel), formatting (Prettier), bundling (webpack), linting (ESLint), and more?"
-              slug="rust"
-            />
-            <ArticlePost
-              title="Everything I Know About Style Guides, Design Systems, and Component Libraries"
-              excerpt="A deep-dive on everything I've learned in the past year building style guides, design systems, component libraries, and their best practices."
-              slug="style-guides-component-libraries-design-systems"
-            />
-            <ArticlePost
-              title="Building a Design System Monorepo with Turborepo"
-              excerpt="Manage multiple packages with a shared build, test, and release process using Turborepo, Changesets, Storybook, and more."
-              slug="turborepo-design-system-monorepo"
-            />
+            {featuredArticles.map((article) => (
+              <ArticlePost
+                key={article.title}
+                slug={article.slug}
+                title={article.title}
+                excerpt={article.excerpt}
+              />
+            ))}
           </>
         )}
         <h3 className="mt-8 mb-4 text-2xl font-bold tracking-tight text-black dark:text-white md:text-4xl">
@@ -96,9 +92,14 @@ export default function Articles({ articles }: InferGetStaticPropsType<typeof ge
 export async function getStaticProps() {
   const articles: ArticleMeta[] = getArticles().map((article) => article.meta);
 
+  const featuredArticles: ArticleMeta[] = getFeaturedArticles()
+    .slice(0, 3)
+    .map((article) => article.meta);
+
   return {
     props: {
       articles,
+      featuredArticles,
     },
   };
 }

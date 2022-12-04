@@ -15,7 +15,7 @@ export default function ArticleLayout({ children, post }: PropsWithChildren<{ po
     <Container>
       <Meta
         title={`${post.meta.title} – Hafizh Maulana Y`}
-        description={post.meta.description}
+        description={post.meta.excerpt}
         // image={post.meta.image}
         date={new Date(post.meta.date).toISOString()}
         type="article"
