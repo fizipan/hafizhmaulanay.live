@@ -23,7 +23,7 @@ export default function ShareArticle({ text, url }: { text: string; url: string 
   };
 
   return (
-    <div className="my-4 w-full justify-between rounded border border-blue-200 bg-blue-50 p-6 text-center dark:border-gray-800 dark:bg-blue-opaque md:flex">
+    <div className="my-4 w-full justify-between rounded border border-blue-200 bg-blue-50 p-6 text-center dark:border-gray-800 dark:bg-blue-opaque md:flex md:text-left">
       <div>
         <p className="text-lg font-bold text-gray-900 dark:text-gray-100 md:text-xl">
           Please share this article if you find it useful
