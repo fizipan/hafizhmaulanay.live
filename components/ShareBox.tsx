@@ -4,22 +4,23 @@ export default function ShareArticle({ text, url }: { text: string; url: string 
   const [isSupportWebShare, setSupportWebShare] = useState(false);
 
   useEffect(() => {
-    if (navigator.share !== undefined || navigator.canShare !== undefined) {
+    if (navigator.canShare()) {
       setSupportWebShare(true);
     }
   }, []);
 
-  const shareMe = (e: React.MouseEvent<HTMLElement>) => {
+  const shareMe = async (e: React.MouseEvent<HTMLElement>) => {
     e.preventDefault();
 
-    navigator
-      .share({
+    try {
+      await navigator.share({
         title: 'hafizhmaulanay.live',
         text: text,
         url: url,
-      })
-      .then(() => console.log('Successful share'))
-      .catch((error) => console.log('Error sharing', error));
+      });
+    } catch (err) {
+      console.log('Error sharing', err);
+    }
   };
 
   return (
