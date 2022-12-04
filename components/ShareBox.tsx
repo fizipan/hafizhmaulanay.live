@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 
 export default function ShareArticle({ text, url }: { text: string; url: string }) {
   const [isSupportWebShare, setSupportWebShare] = useState(false);
+  const [test, setTest] = useState(false);
 
   useEffect(() => {
     if (navigator.share !== undefined) {
@@ -9,7 +10,8 @@ export default function ShareArticle({ text, url }: { text: string; url: string 
     }
   }, []);
 
-  const shareMe = () => {
+  const shareMe = (e: React.MouseEvent<HTMLElement>) => {
+    e.preventDefault();
 
     navigator
       .share({
@@ -17,12 +19,12 @@ export default function ShareArticle({ text, url }: { text: string; url: string 
         text: text,
         url: url,
       })
-      .then(() => console.log('Successful share'))
+      .then(() => setTest(true))
       .catch((error) => console.log('Error sharing', error));
   };
 
   return (
-    <div className="my-4 w-full justify-between rounded border border-blue-200 bg-blue-50 p-6 text-center dark:border-gray-800 dark:bg-blue-opaque md:flex md:text-left">
+    <div className="my-4 w-full justify-between rounded border border-blue-200 bg-blue-50 p-6 dark:border-gray-800 dark:bg-blue-opaque md:flex">
       <div>
         <p className="text-lg font-bold text-gray-900 dark:text-gray-100 md:text-xl">
           Please share this article if you find it useful
@@ -31,13 +33,26 @@ export default function ShareArticle({ text, url }: { text: string; url: string 
           Sharing is caring. It helps me to grow and improve my content.
         </p>
       </div>
+      {test ? (
+        <div className="text-center">
+          <p className="text-lg font-bold text-gray-900 dark:text-gray-100 md:text-xl">
+            Berhasil diklik
+          </p>
+        </div>
+      ) : (
+        <div className="text-center">
+          <p className="text-lg font-bold text-gray-900 dark:text-gray-100 md:text-xl">
+            Belum diklik
+          </p>
+        </div>
+      )}
       <button
         className="mt-4 flex h-8 w-full items-center justify-center rounded bg-gray-100 px-4 py-1 font-medium text-gray-900 dark:bg-gray-700 dark:text-gray-100 md:w-28"
         type="submit"
       >
         {isSupportWebShare ? (
-          <button
-            type="button"
+          <a
+            href={''}
             onClick={shareMe}
             title="Share this article"
             className="flex items-center justify-center"
@@ -56,7 +71,7 @@ export default function ShareArticle({ text, url }: { text: string; url: string 
               <polygon points="22 2 15 22 11 13 2 9 22 2" />
             </svg>
             Share
-          </button>
+          </a>
         ) : (
           <a
             href={`https://twitter.com/intent/tweet?text=${encodeURIComponent(
