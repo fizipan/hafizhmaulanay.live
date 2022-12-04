@@ -4,7 +4,7 @@ const SITE_METADATA = {
     'Front-end developer, JavaScript enthusiast, Laravel lover, and open source contributor.',
   url: 'https://hafizhmaulanay.live',
   type: 'website',
-  image: 'https://hafizhmaulanay.live/static/images/lee-banner.png',
+  image: 'https://hafizhmaulanay.live/static/images/hafizh-banner.png',
   date: '',
 };
 
