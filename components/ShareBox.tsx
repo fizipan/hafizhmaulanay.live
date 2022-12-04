@@ -2,7 +2,6 @@ import { useEffect, useState } from 'react';
 
 export default function ShareArticle({ text, url }: { text: string; url: string }) {
   const [isSupportWebShare, setSupportWebShare] = useState(false);
-  const [test, setTest] = useState(false);
 
   useEffect(() => {
     if (navigator.share !== undefined) {
@@ -19,7 +18,7 @@ export default function ShareArticle({ text, url }: { text: string; url: string 
         text: text,
         url: url,
       })
-      .then(() => setTest(true))
+      .then(() => console.log('Successful share'))
       .catch((error) => console.log('Error sharing', error));
   };
 
@@ -33,19 +32,6 @@ export default function ShareArticle({ text, url }: { text: string; url: string 
           Sharing is caring. It helps me to grow and improve my content.
         </p>
       </div>
-      {test ? (
-        <div className="text-center">
-          <p className="text-lg font-bold text-gray-900 dark:text-gray-100 md:text-xl">
-            Berhasil diklik
-          </p>
-        </div>
-      ) : (
-        <div className="text-center">
-          <p className="text-lg font-bold text-gray-900 dark:text-gray-100 md:text-xl">
-            Belum diklik
-          </p>
-        </div>
-      )}
       <button
         className="mt-4 flex h-8 w-full items-center justify-center rounded bg-gray-100 px-4 py-1 font-medium text-gray-900 dark:bg-gray-700 dark:text-gray-100 md:w-28"
         type="submit"
