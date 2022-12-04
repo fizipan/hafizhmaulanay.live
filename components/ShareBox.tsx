@@ -9,7 +9,7 @@ export default function ShareArticle({ text, url }: { text: string; url: string 
     }
   }, []);
 
-  const shareMe = (e: React.MouseEvent<HTMLElement>) => {
+  const shareMe = () => {
     e.preventDefault();
 
     navigator
