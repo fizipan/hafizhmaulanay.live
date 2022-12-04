@@ -4,7 +4,7 @@ export default function ShareArticle({ text, url }: { text: string; url: string 
   const [isSupportWebShare, setSupportWebShare] = useState(false);
 
   useEffect(() => {
-    if (navigator.share !== undefined) {
+    if (navigator.share !== undefined || navigator.canShare !== undefined) {
       setSupportWebShare(true);
     }
   }, []);
