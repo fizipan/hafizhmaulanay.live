@@ -10,7 +10,6 @@ export default function ShareArticle({ text, url }: { text: string; url: string 
   }, []);
 
   const shareMe = () => {
-    e.preventDefault();
 
     navigator
       .share({
@@ -37,8 +36,8 @@ export default function ShareArticle({ text, url }: { text: string; url: string 
         type="submit"
       >
         {isSupportWebShare ? (
-          <a
-            href="#"
+          <button
+            type="button"
             onClick={shareMe}
             title="Share this article"
             className="flex items-center justify-center"
@@ -57,7 +56,7 @@ export default function ShareArticle({ text, url }: { text: string; url: string 
               <polygon points="22 2 15 22 11 13 2 9 22 2" />
             </svg>
             Share
-          </a>
+          </button>
         ) : (
           <a
             href={`https://twitter.com/intent/tweet?text=${encodeURIComponent(
