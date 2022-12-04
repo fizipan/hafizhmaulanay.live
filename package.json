@@ -1,7 +1,9 @@
 {
-  "name": "hafizhmaulanay.com",
-  "version": "0.1.0",
+  "name": "hafizhmaulanay.live",
+  "description": "⚡ My portfolio built with Next.js, Tailwind, and Vercel.",
+  "version": "1.0.0",
   "private": true,
+  "author": "Hafizh Maulana Yusliansyah <github.com/hafizhmaulanay>",
   "scripts": {
     "dev": "next dev",
     "build": "next build",
