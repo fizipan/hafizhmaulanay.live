@@ -1,11 +1,16 @@
+import { InferGetStaticPropsType } from 'next';
 import Image from 'next/image';
+import Link from 'next/link';
 
 import Container from '@/components/Container';
 import ArticlePostCard from '@/components/ArticlePostCard';
 import ArticlePost from '@/components/ArticlePost';
 import Meta from '@/components/Meta';
 
-export default function Home() {
+import { ArticleMeta } from '@/libs/types';
+import { getArticles } from '@/libs/api';
+
+export default function Home({ articles }: InferGetStaticPropsType<typeof getStaticProps>) {
   return (
     <Container>
       <Meta />
@@ -64,30 +69,16 @@ export default function Home() {
           Everything that is on my mind, I will write here. mostly about web development, tips &
           trick and tech careers.
         </p>
-        <ArticlePost
-          title="Developer Experience at Vercel"
-          slug="developer-experience-at-vercel"
-          excerpt="Why is Rust being used to replace parts of the JavaScript web ecosystem like minification (Terser), transpilation (Babel), formatting (Prettier), bundling (webpack), linting (ESLint), and more?"
-        />
-        <ArticlePost
-          title="Developer Experience at Vercel"
-          slug="developer-experience-at-vercel"
-          excerpt="Why is Rust being used to replace parts of the JavaScript web ecosystem like minification (Terser), transpilation (Babel), formatting (Prettier), bundling (webpack), linting (ESLint), and more?"
-        />
-        <ArticlePost
-          title="Developer Experience at Vercel"
-          slug="developer-experience-at-vercel"
-          excerpt="Why is Rust being used to replace parts of the JavaScript web ecosystem like minification (Terser), transpilation (Babel), formatting (Prettier), bundling (webpack), linting (ESLint), and more?"
-        />
-        <ArticlePost
-          title="Developer Experience at Vercel"
-          slug="developer-experience-at-vercel"
-          excerpt="Why is Rust being used to replace parts of the JavaScript web ecosystem like minification (Terser), transpilation (Babel), formatting (Prettier), bundling (webpack), linting (ESLint), and more?"
-        />
-        <a
-          target="_blank"
-          rel="noopener noreferrer"
-          href="#"
+        {articles.map((article) => (
+          <ArticlePost
+            key={article.title}
+            slug={article.slug}
+            title={article.title}
+            excerpt={article.excerpt}
+          />
+        ))}
+        <Link
+          href="/articles"
           className="mt-2 flex h-6 items-center rounded-lg leading-7 text-gray-600 transition-all hover:text-gray-800 dark:text-gray-400 dark:hover:text-gray-200"
         >
           Read all articles
@@ -105,8 +96,20 @@ export default function Home() {
               d="M17.5 12h-15m11.667-4l3.333 4-3.333-4zm3.333 4l-3.333 4 3.333-4z"
             />
           </svg>
-        </a>
+        </Link>
       </div>
     </Container>
   );
+}
+
+export async function getStaticProps() {
+  const articles: ArticleMeta[] = getArticles()
+    .slice(0, 9)
+    .map((article) => article.meta);
+
+  return {
+    props: {
+      articles,
+    },
+  };
 }

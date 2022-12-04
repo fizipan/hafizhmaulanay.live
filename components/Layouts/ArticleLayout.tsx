@@ -1,19 +1,23 @@
 import Image from 'next/image';
+import Link from 'next/link';
 import { parseISO, format } from 'date-fns';
 import { PropsWithChildren } from 'react';
 
 import Container from '@/components/Container';
 import Meta from '@/components/Meta';
-import { Articles } from '@/libs/types';
+import ShareBox from '@/components/ShareBox';
 
-export default function ArticleLayout({ children, post }: PropsWithChildren<{ post: any }>) {
+import { Articles } from '@/libs/types';
+import { POSTS_LOCATION, SITE_METADATA } from '@/libs/constants';
+
+export default function ArticleLayout({ children, post }: PropsWithChildren<{ post: Articles }>) {
   return (
     <Container>
       <Meta
         title={`${post.meta.title} – Hafizh Maulana Y`}
         description={post.meta.description}
-        image={post.meta.image}
-        date={post.meta.date}
+        // image={post.meta.image}
+        date={new Date(post.meta.date).toISOString()}
         type="article"
       />
       <article className="mx-auto mb-16 flex w-full max-w-2xl flex-col items-start justify-center">
@@ -32,7 +36,7 @@ export default function ArticleLayout({ children, post }: PropsWithChildren<{ po
             />
             <p className="ml-2 text-sm text-gray-700 dark:text-gray-300">
               {'Hafizh Maulana Y / '}
-              {post.meta.date}
+              {format(parseISO(new Date(post.meta.date).toISOString()), 'MMMM dd, yyyy')}
             </p>
           </div>
           <p className="min-w-32 mt-2 text-sm text-gray-600 dark:text-gray-400 md:mt-0">
@@ -40,19 +44,17 @@ export default function ArticleLayout({ children, post }: PropsWithChildren<{ po
           </p>
         </div>
         <div className="prose mt-4 w-full max-w-none dark:prose-dark">{children}</div>
+        <div className="mt-8 w-full">
+          <ShareBox
+            text={post.meta.title}
+            url={`${SITE_METADATA.url}/articles/${post.meta.slug}`}
+          />
+        </div>
         <div className="text-sm text-gray-700 dark:text-gray-300">
-          <a
-            href={`https://mobile.twitter.com/search?q=${encodeURIComponent(
-              `https://hafizhmaulanay.live/blog/${post.meta.slug}`
-            )}`}
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            {'Discuss on Twitter'}
-          </a>
+          <Link href="/articles">{'Back to articles'}</Link>
           {` • `}
           <a
-            href="https://github.com/hafizhmaulanay/hafizhmaulanay.live/issues"
+            href={`${POSTS_LOCATION}/${post.meta.slug}.mdx`}
             target="_blank"
             rel="noopener noreferrer"
           >

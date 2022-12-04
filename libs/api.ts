@@ -23,10 +23,10 @@ const getPostFromSlug = (slug: string) => {
   return {
     content,
     meta: {
-      slug,
-      excerpt: data.excerpt ?? 'slug',
       title: data.title ?? slug,
       date: format(new Date(data.date), 'MMMM dd, yyyy'),
+      excerpt: data.excerpt ?? 'slug',
+      slug,
     },
   };
 };

@@ -8,4 +8,6 @@ const SITE_METADATA = {
   date: '',
 };
 
-export { SITE_METADATA };
+const POSTS_LOCATION = 'https://github.com/hafizhmaulanay/hafizhmaulanay.com/edit/main/_posts';
+
+export { SITE_METADATA, POSTS_LOCATION };

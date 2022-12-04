@@ -5,7 +5,7 @@ export default function ArticlePost({ slug, title, excerpt }: ArticlePostProps) 
   return (
     <Link
       href={`/articles/${slug}`}
-      className="border-grey-200 mb-8 w-full rounded border bg-white p-4 transition-all hover:scale-[1.01] dark:border-gray-800 dark:bg-gray-900"
+      className="mb-8 w-full rounded border border-gray-200 bg-white p-4 transition-all hover:scale-[1.01] dark:border-gray-800 dark:bg-gray-900"
     >
       <div className="w-full">
         <div className="flex flex-col justify-between md:flex-row">

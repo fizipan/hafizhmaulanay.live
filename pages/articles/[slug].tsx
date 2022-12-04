@@ -8,11 +8,11 @@ import { mdxToHtml } from '@/libs/mdx';
 import { Articles } from '@/libs/types';
 import { getPostFromSlug, getSlugs } from '@/libs/api';
 
-export default function ArticlePage({ post }: { post: any }) {
+export default function PostPage({ post }: { post: Articles }) {
   return (
     <ArticleLayout post={post}>
       <MDXRemote
-        {...post.source.html}
+        {...post.source}
         components={
           {
             ...components,
@@ -36,14 +36,14 @@ export async function getStaticProps({ params }: Params) {
   const { slug } = params;
   const { content, meta } = getPostFromSlug(slug);
 
-  const mdxSource = await mdxToHtml(content);
+  const { html, readingTime } = await mdxToHtml(content);
 
   return {
     props: {
       post: {
-        source: mdxSource,
+        source: html,
         meta,
-        ...mdxSource,
+        readingTime,
       },
     },
   };

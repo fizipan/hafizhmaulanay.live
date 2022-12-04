@@ -5,12 +5,12 @@ import Container from '@/components/Container';
 import ArticlePost from '@/components/ArticlePost';
 import Meta from '@/components/Meta';
 
-import { ArticlePostProps } from '@/libs/types';
+import { ArticleMeta } from '@/libs/types';
 import { getArticles } from '@/libs/api';
 
 export default function Articles({ articles }: InferGetStaticPropsType<typeof getStaticProps>) {
   const [searchValue, setSearchValue] = useState('');
-  const filteredArticlePosts = articles.filter((article: ArticlePostProps) =>
+  const filteredArticlePosts = articles.filter((article: ArticleMeta) =>
     article.title.toLowerCase().includes(searchValue.toLowerCase())
   );
 
@@ -94,9 +94,7 @@ export default function Articles({ articles }: InferGetStaticPropsType<typeof ge
 }
 
 export async function getStaticProps() {
-  const articles: ArticlePostProps[] = getArticles()
-    .slice(0, 9)
-    .map((post) => post.meta);
+  const articles: ArticleMeta[] = getArticles().map((article) => article.meta);
 
   return {
     props: {

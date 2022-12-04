@@ -2,14 +2,20 @@ import React from 'react';
 import { MDXRemoteSerializeResult } from 'next-mdx-remote';
 
 export interface Articles {
-  slug: string;
-  content: MDXRemoteSerializeResult;
+  source: MDXRemoteSerializeResult;
+  meta: ArticleMeta;
+  readingTime: string;
+}
+
+export interface ArticleMeta {
   title: string;
   date: string;
   excerpt: string;
-  coverImage: string;
+  slug: string;
+  description?: string;
 }
 
+// PROPS ---------------------------------------------- //
 export interface NavItemProps {
   href: string;
   text: string;
@@ -43,7 +49,6 @@ export interface ArticlePostProps {
   title: string;
   slug: string;
   excerpt: string;
-  date?: string;
 }
 
 export interface ImageWithThemeProps {
