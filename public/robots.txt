@@ -1,0 +1,9 @@
+# *
+User-agent: *
+Allow: /
+
+# Host
+Host: https://hafizhmaulanay.live
+
+# Sitemaps
+Sitemap: https://hafizhmaulanay.live/sitemap.xml
