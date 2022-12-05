@@ -7,9 +7,9 @@
   "scripts": {
     "dev": "next dev",
     "build": "next build",
+    "postbuild": "next-sitemap",
     "start": "next start",
-    "lint": "next lint",
-    "gen:sitemap": "next-sitemap"
+    "lint": "next lint"
   },
   "dependencies": {
     "@next/font": "^13.0.5",
