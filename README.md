@@ -25,6 +25,7 @@
 - [x] Code highlighting, support line highlighting
 - [x] Image optimization, mostly using [Next-Image](https://nextjs.org/docs/api-reference/next/image)
 - [x] Reading Time
+- [x] Vercel Analytics
 - [ ] Infinite Scroll
 - [ ] Dual language support (ID and EN)
 - [ ] Article tags
