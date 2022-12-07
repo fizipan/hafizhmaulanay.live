@@ -16,23 +16,7 @@ const nextConfig = {
 };
 
 // https://nextjs.org/docs/advanced-features/security-headers
-const ContentSecurityPolicy = `
-    default-src 'self';
-    script-src 'self' 'unsafe-eval' 'unsafe-inline' *.youtube.com *.twitter.com;
-    child-src *.youtube.com *.twitter.com;
-    style-src 'self' 'unsafe-inline' *.googleapis.com;
-    img-src * blob: data:;
-    media-src 'none';
-    connect-src *;
-    font-src 'self';
-`;
-
 const securityHeaders = [
-  // https://developer.mozilla.org/en-US/docs/Web/HTTP/CSP
-  {
-    key: 'Content-Security-Policy',
-    value: ContentSecurityPolicy.replace(/\n/g, ''),
-  },
   // https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Referrer-Policy
   {
     key: 'Referrer-Policy',
