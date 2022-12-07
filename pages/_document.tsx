@@ -19,6 +19,11 @@ export default function Document() {
         />
       </Head>
       <body className="bg-white text-white dark:bg-black dark:text-black">
+        <noscript
+          dangerouslySetInnerHTML={{
+            __html: `<iframe src="https://www.googletagmanager.com/ns.html?id=GTM-PJVGNK8" height="0" width="0" style="display:none;visibility:hidden"></iframe>`,
+          }}
+        ></noscript>
         <Main />
         <NextScript />
       </body>
