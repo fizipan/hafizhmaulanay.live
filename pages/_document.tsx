@@ -4,14 +4,6 @@ export default function Document() {
   return (
     <Html lang="en">
       <Head>
-        <link rel="authorization_endpoint" href="https://indieauth.com/auth" />
-
-        <link href="https://github.com/hafizhmaulanay" rel="me" />
-        <link href="https://twitter.com/hafizhmaulanay" rel="me" />
-
-        <link rel="webmention" href="https://webmention.io/hafizhmaulanay.live/webmention" />
-        <link rel="pingback" href="https://webmention.io/hafizhmaulanay.live/xmlrpc" />
-
         <link href="/static/favicons/favicon.ico" rel="shortcut icon" />
         <link href="/static/favicons/site.webmanifest" rel="manifest" />
         <link href="/static/favicons/apple-touch-icon.png" rel="apple-touch-icon" sizes="180x180" />
