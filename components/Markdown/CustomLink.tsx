@@ -9,7 +9,7 @@ export default function CustomLink({ href, children }: CustomLinkProps) {
   }
 
   return (
-    <a target="_blank" rel="noopener noreferrer">
+    <a href={href} target="_blank" rel="noopener noreferrer">
       {children}
     </a>
   );

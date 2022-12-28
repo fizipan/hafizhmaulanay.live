@@ -6,7 +6,7 @@ import Meta from '@/components/Meta';
 export default function NotFound() {
   return (
     <Container>
-      <Meta title="404 - Hafizh Maulana Y" />
+      <Meta title="404 - Hafizh Maulana Yusliansyah" />
       <div className="mx-auto mb-16 flex max-w-2xl flex-col items-start justify-center">
         <h1 className="mb-4 text-3xl font-bold tracking-tight text-black dark:text-white md:text-5xl">
           404 – Page Not Found

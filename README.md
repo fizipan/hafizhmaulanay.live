@@ -51,4 +51,4 @@ Please review the [license](https://github.com/hafizhmaulanay/hafizhmaulanay.liv
 
 ---
 
-Copyright © 2022 by Hafizh Maulana Y
+Copyright © 2022 by Hafizh Maulana Yusliansyah.

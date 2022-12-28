@@ -20,7 +20,7 @@ export default function Articles({
   return (
     <Container>
       <Meta
-        title="Articles – Hafizh Maulana Y"
+        title="Articles – Hafizh Maulana Yusliansyah"
         description="Thoughts on the software industry, programming, tech, videography, music, and my personal life."
       />
       <div className="mx-auto mb-16 flex max-w-2xl flex-col items-start justify-center">

@@ -27,7 +27,7 @@ export default function Home({
         <div className="flex flex-col-reverse items-start sm:flex-row">
           <div className="flex flex-col pr-8">
             <h1 className="mb-1 text-3xl font-bold tracking-tight text-black dark:text-white md:text-5xl">
-              Hafizh Maulana Y
+              Hafizh Maulana. Y
             </h1>
             <h2 className="mb-4 text-gray-700 dark:text-gray-200">
               SE of Developer Experience at <span className="font-semibold">Art By Code</span>
@@ -39,7 +39,7 @@ export default function Home({
           </div>
           <div className="relative mb-8 mr-auto w-[80px] sm:mb-0 sm:w-[176px]">
             <Image
-              alt="Hafizh Maulana Y"
+              alt="Hafizh Maulana Yusliansyah"
               height={176}
               width={176}
               src="/avatar.png"

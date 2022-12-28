@@ -14,7 +14,7 @@ export default function ArticleLayout({ children, post }: PropsWithChildren<{ po
   return (
     <Container>
       <Meta
-        title={`${post.meta.title} – Hafizh Maulana Y`}
+        title={`${post.meta.title} – Hafizh Maulana Yusliansyah`}
         description={post.meta.excerpt}
         // image={post.meta.image}
         date={new Date(post.meta.date).toISOString()}
@@ -27,7 +27,7 @@ export default function ArticleLayout({ children, post }: PropsWithChildren<{ po
         <div className="mt-2 flex w-full flex-col items-start justify-between md:flex-row md:items-center">
           <div className="flex items-center">
             <Image
-              alt="Hafizh Maulana Y"
+              alt="Hafizh Maulana Yusliansyah"
               height={24}
               width={24}
               sizes="20vw"
@@ -35,7 +35,7 @@ export default function ArticleLayout({ children, post }: PropsWithChildren<{ po
               className="rounded-full"
             />
             <p className="ml-2 text-sm text-gray-700 dark:text-gray-300">
-              {'Hafizh Maulana Y / '}
+              {'Hafizh Maulana. Y / '}
               {format(parseISO(new Date(post.meta.date).toISOString()), 'MMMM dd, yyyy')}
             </p>
           </div>

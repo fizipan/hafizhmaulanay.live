@@ -21,7 +21,7 @@ export default function Meta({
       <meta property="og:url" content={`${url}${router.asPath}`} />
       <link rel="canonical" href={`${url}${router.asPath}`} />
       <meta property="og:type" content={type} />
-      <meta property="og:site_name" content="Hafizh Maulana Y" />
+      <meta property="og:site_name" content="Hafizh Maulana Yusliansyah" />
       <meta property="og:description" content={description} />
       <meta property="og:title" content={title} />
       <meta property="og:image" content={image} />
