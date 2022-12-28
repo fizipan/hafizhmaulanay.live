@@ -22,6 +22,7 @@
     "eslint": "8.28.0",
     "eslint-config-next": "13.0.5",
     "gray-matter": "^4.0.3",
+    "motion": "^10.15.3",
     "next": "13.0.5",
     "next-mdx-remote": "^4.2.0",
     "next-sitemap": "^3.1.32",
@@ -35,6 +36,7 @@
     "rehype-prism-plus": "^1.5.0",
     "rehype-slug": "^5.1.0",
     "remark-gfm": "^3.0.1",
+    "swr": "^2.0.0",
     "typescript": "4.9.3",
     "use-delayed-render": "^0.0.7"
   },
