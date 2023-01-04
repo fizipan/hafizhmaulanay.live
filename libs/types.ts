@@ -1,77 +1,79 @@
 import React from 'react';
 import { MDXRemoteSerializeResult } from 'next-mdx-remote';
 
-export interface Articles {
+// COMPONENTS ---------------------------------------------- //
+export type Articles = {
   source: MDXRemoteSerializeResult;
   meta: ArticleMeta;
   readingTime: string;
-}
+};
 
-export interface ArticleMeta {
+export type ArticleMeta = {
   title: string;
   date: string;
   excerpt: string;
   slug: string;
   featured: boolean;
-}
+};
 
 // PROPS ---------------------------------------------- //
-export interface NavItemProps {
+export type NavItemProps = {
   href: string;
   text: string;
-}
+};
 
-export interface ContainerProps {
+export type ContainerProps = {
   children: React.ReactNode;
-}
+};
 
-export interface ExternalLinkProps {
+export type ExternalLinkProps = {
   href: string;
   children: React.ReactNode;
-}
+};
 
-export interface MetaProps {
+export type MetaProps = {
   title?: string;
   description?: string;
   url?: string;
   image?: string;
   type?: string;
   date?: string;
-}
+};
 
-export interface ArticlePostCardProps {
+export type ArticlePostCardProps = {
   title: string;
   slug: string;
   gradient: string;
-}
+};
 
-export interface ArticlePostProps {
+export type ArticlePostProps = {
   title: string;
   slug: string;
   excerpt: string;
-}
+};
 
-export interface ImageWithThemeProps {
+export type ImageWithThemeProps = {
   light: string;
   dark: string;
   alt: string;
-}
+};
 
-export interface RoundedImageProps {
+export type RoundedImageProps = {
   src: string;
   alt: string;
-}
+};
 
-export interface CalloutProps {
+export type CalloutProps = {
   emoji: string;
   children: React.ReactNode;
-}
+};
 
-export interface CustomLinkProps {
+export type CustomLinkProps = {
   href: string;
   children: React.ReactNode;
-}
+};
 
+// Spotify ---------------------------------------------- //
 export type NowPlayingSong = {
   album: string;
   albumImageUrl: string;
@@ -80,3 +82,35 @@ export type NowPlayingSong = {
   songUrl: string;
   title: string;
 };
+
+// Utterances ---------------------------------------------- //
+export type UtterancesProps = Utterances;
+
+export type Utterances = {
+  repo: Repo;
+  label?: string;
+  theme: Theme;
+} & Issue;
+
+export type Repo = `${string}/${string}`;
+
+export type Issue =
+  | {
+      issueTerm: Term | string[];
+      issueNumber?: never;
+    }
+  | {
+      issueTerm?: never;
+      issueNumber: number;
+    };
+
+export type Term = 'pathname' | 'url' | 'title' | 'og:title';
+export type Theme =
+  | 'github-light'
+  | 'github-dark'
+  | 'preferred-color-scheme'
+  | 'github-dark-orange'
+  | 'icy-dark'
+  | 'dark-blue'
+  | 'photon-dark'
+  | 'boxy-light';

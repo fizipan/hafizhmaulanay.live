@@ -2,15 +2,18 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { parseISO, format } from 'date-fns';
 import { PropsWithChildren } from 'react';
+import { useTheme } from 'next-themes';
 
 import Container from '@/components/Container';
 import Meta from '@/components/Meta';
 import ShareBox from '@/components/ShareBox';
+import CommentBox from '@/components/CommentBox';
 
 import { Articles } from '@/libs/types';
 import { POSTS_LOCATION, SITE_METADATA } from '@/libs/constants';
 
 export default function ArticleLayout({ children, post }: PropsWithChildren<{ post: Articles }>) {
+  const { theme } = useTheme();
   return (
     <Container>
       <Meta
@@ -60,6 +63,14 @@ export default function ArticleLayout({ children, post }: PropsWithChildren<{ po
           >
             {'Suggest Change'}
           </a>
+        </div>
+        <div className="mt-8 w-full">
+          <CommentBox
+            repo="hafizhmaulanay/blog-comments"
+            issueTerm="url"
+            theme={theme === 'dark' ? 'github-dark' : 'github-light'}
+            label="comment"
+          />
         </div>
       </article>
     </Container>

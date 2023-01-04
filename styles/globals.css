@@ -214,3 +214,8 @@ table {
 .prose .callout > p {
   margin: 0 !important;
 }
+
+/* commentbox */
+#comment-skeleton.hide {
+  @apply hidden;
+}
