@@ -42,7 +42,7 @@ const putChildElement = (parent: HTMLElement, child: HTMLElement): HTMLElement =
 
   setTimeout(() => {
     parent.appendChild(child);
-  }, 1000);
+  }, 800);
 
   return parent;
 };
