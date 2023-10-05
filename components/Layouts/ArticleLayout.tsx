@@ -66,7 +66,7 @@ export default function ArticleLayout({ children, post }: PropsWithChildren<{ po
         </div>
         <div className="mt-8 w-full">
           <CommentBox
-            repo="hafizhmaulanay/blog-comments"
+            repo="fizipan/blog-comments"
             issueTerm="url"
             theme={theme === 'dark' ? 'github-dark' : 'github-light'}
             label="comment"
