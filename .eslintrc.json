@@ -1,6 +1,86 @@
 {
-  "extends": "next/core-web-vitals",
+  "parser": "@typescript-eslint/parser",
+  "extends": [
+    "next",
+    "next/core-web-vitals",
+    "plugin:@typescript-eslint/recommended",
+    "prettier",
+    "plugin:prettier/recommended"
+  ],
+  "plugins": [
+    "@typescript-eslint/eslint-plugin",
+    "simple-import-sort",
+    "unused-imports",
+    "prettier"
+  ],
+  "env": {
+    "es6": true,
+    "browser": true,
+    "jest": true,
+    "node": true
+  },
+  "settings": {
+    "react": {
+      "version": "detect"
+    }
+  },
   "rules": {
-    "react/no-unescaped-entities": "off"
+    "@typescript-eslint/ban-ts-comment": "off",
+    "@typescript-eslint/no-use-before-define": "off",
+    "@typescript-eslint/no-var-requires": "off",
+    "@typescript-eslint/dot-notation": "off",
+    "@typescript-eslint/naming-convention": "off",
+    "@typescript-eslint/lines-between-class-members": "off",
+    "@typescript-eslint/no-shadow": "off",
+    "@next/next/no-img-element": "off",
+    "react/jsx-filename-extension": [
+      "error",
+      { "extensions": [".js", ".tsx"] }
+    ],
+    "no-console": [
+      2,
+      {
+        "allow": ["warn", "error"]
+      }
+    ],
+
+    // Unused Import
+    "@typescript-eslint/no-unused-vars": "off",
+    "unused-imports/no-unused-imports": "warn",
+    "unused-imports/no-unused-vars": [
+      "warn",
+      {
+        "vars": "all",
+        "varsIgnorePattern": "^_",
+        "args": "after-used",
+        "argsIgnorePattern": "^_"
+      }
+    ],
+    // /end Unused Import
+
+    // Import Sort
+    "simple-import-sort/exports": "warn",
+    "simple-import-sort/imports": [
+      "warn",
+      {
+        "groups": [
+          // Side effect imports.
+          ["^\\u0000"],
+          ["^node:", "^react", "^next", "^@radix"],
+          // Packages.
+          // Things that start with a letter (or digit or underscore), or `@` followed by a letter.
+          ["^@?\\w"],
+          ["^~?\\w"],
+          // Absolute imports and other imports such as Vue-style `@/foo`.
+          // Anything not matched in another group.
+          ["^"],
+          // Relative imports.
+          // Anything that starts with a dot.
+          ["^\\."],
+          ["^.+\\.s?css$"]
+        ]
+      }
+    ]
+    // /end Import Sort
   }
 }
