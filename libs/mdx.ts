@@ -9,19 +9,21 @@ import rehypePrism from 'rehype-prism-plus';
 export async function mdxToHtml(source: string) {
   const mdxSource = await serialize(source, {
     mdxOptions: {
-      remarkPlugins: [remarkGfm],
+      // next-mdx-remote@6 can resolve its own unified/vfile types which may
+      // differ from top-level plugin typings; runtime behavior is unchanged.
+      remarkPlugins: [remarkGfm as any],
       rehypePlugins: [
-        rehypeSlug,
-        rehypeCodeTitles,
-        rehypePrism,
+        rehypeSlug as any,
+        rehypeCodeTitles as any,
+        rehypePrism as any,
         [
-          rehypeAutolinkHeadings,
+          rehypeAutolinkHeadings as any,
           {
             properties: {
               className: ['anchor'],
             },
           },
-        ],
+        ] as any,
       ],
       format: 'mdx',
     },
