@@ -1,58 +1,8 @@
+import Link from 'next/link';
+
 import Container from '@/components/Container';
 import Meta from '@/components/Meta';
-
-type ProjectItem = {
-  title: string;
-  description: string;
-  stack: string[];
-  status: 'Live' | 'In Progress' | 'Archived';
-  year: string;
-  demoUrl?: string;
-  repoUrl?: string;
-};
-
-const projects: ProjectItem[] = [
-  {
-    title: 'Personal Portfolio Website',
-    description:
-      'Website personal untuk menampilkan profil, artikel, dan eksperimen frontend dengan fokus performa dan pengalaman pengguna.',
-    stack: ['Next.js', 'TypeScript', 'Tailwind CSS'],
-    status: 'Live',
-    year: '2026',
-    demoUrl: 'https://hafizhmaulanay.live',
-    repoUrl: 'https://github.com/hafizhmaulanay/hafizhmaulanay.live',
-  },
-  {
-    title: 'Now Playing API Integration',
-    description:
-      'Integrasi API Spotify untuk menampilkan status lagu yang sedang diputar secara realtime pada bagian footer website.',
-    stack: ['Next.js API Routes', 'SWR', 'Spotify API'],
-    status: 'Live',
-    year: '2026',
-  },
-  {
-    title: 'MDX Technical Writing Workflow',
-    description:
-      'Sistem publikasi artikel berbasis MDX dengan alur penulisan sederhana, SEO metadata, dan rendering komponen markdown custom.',
-    stack: ['MDX', 'next-mdx-remote', 'Remark/Rehype'],
-    status: 'Live',
-    year: '2026',
-  },
-  {
-    title: 'Developer Experience Playground',
-    description:
-      'Koleksi eksperimen kecil untuk mengevaluasi pattern frontend, kualitas kode, dan standardisasi komponen untuk project production.',
-    stack: ['React', 'TypeScript', 'ESLint'],
-    status: 'In Progress',
-    year: '2026',
-  },
-];
-
-const statusClassMap: Record<ProjectItem['status'], string> = {
-  Live: 'bg-emerald-100 text-emerald-800 dark:bg-emerald-900/40 dark:text-emerald-300',
-  'In Progress': 'bg-amber-100 text-amber-800 dark:bg-amber-900/40 dark:text-amber-300',
-  Archived: 'bg-gray-200 text-gray-700 dark:bg-gray-800 dark:text-gray-300',
-};
+import { projects, statusClassMap } from '@/libs/projects';
 
 export default function Projects() {
   return (
@@ -78,7 +28,9 @@ export default function Projects() {
               className="rounded-2xl border border-gray-200 bg-white p-6 dark:border-gray-800 dark:bg-gray-800/30"
             >
               <div className="mb-3 flex flex-wrap items-center justify-between gap-3">
-                <h2 className="text-xl font-semibold text-black dark:text-white">{project.title}</h2>
+                <h2 className="text-xl font-semibold text-black transition hover:text-gray-700 dark:text-white dark:hover:text-gray-300">
+                  <Link href={`/projects/${project.slug}`}>{project.title}</Link>
+                </h2>
                 <span
                   className={`rounded-full px-3 py-1 text-xs font-semibold ${statusClassMap[project.status]}`}
                 >
@@ -101,6 +53,12 @@ export default function Projects() {
 
               <div className="flex flex-wrap items-center gap-4 text-sm">
                 <span className="text-gray-500 dark:text-gray-400">{project.year}</span>
+                <Link
+                  href={`/projects/${project.slug}`}
+                  className="font-medium text-gray-700 transition hover:text-black dark:text-gray-300 dark:hover:text-white"
+                >
+                  Lihat Detail
+                </Link>
                 {project.demoUrl && (
                   <a
                     href={project.demoUrl}
