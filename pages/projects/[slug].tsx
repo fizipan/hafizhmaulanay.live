@@ -18,7 +18,6 @@ export default function ProjectDetailPage({
       <Meta
         title={`${project.title} - Project Detail`}
         description={project.description}
-        url={`https://hafizhmaulanay.live/projects/${project.slug}`}
       />
 
       <div className="mx-auto mb-16 flex w-full max-w-2xl flex-col items-start justify-center">
