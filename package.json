@@ -11,6 +11,9 @@
     "start": "next start",
     "lint": "next lint"
   },
+  "engines": {
+    "node": "24.x"
+  },
   "dependencies": {
     "@next/font": "^13.0.5",
     "@types/node": "18.11.10",
