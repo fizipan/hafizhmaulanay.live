@@ -1,10 +1,13 @@
 import Link from 'next/link';
 
 import Container from '@/components/Container';
+import useProjectBookmarks from '@/hooks/useProjectBookmarks';
 import Meta from '@/components/Meta';
 import { projects, statusClassMap } from '@/libs/projects';
 
 export default function Projects() {
+  const { bookmarkedCount, isBookmarked, isHydrated, toggleBookmark } = useProjectBookmarks();
+
   return (
     <Container>
       <Meta
@@ -20,6 +23,9 @@ export default function Projects() {
           Beberapa project yang pernah dan sedang saya kerjakan. Fokus utama saya adalah performa
           web, maintainability, dan developer experience.
         </p>
+        <p className="mb-6 text-sm text-gray-600 dark:text-gray-400">
+          Total bookmark: {isHydrated ? bookmarkedCount : 0}
+        </p>
 
         <div className="grid w-full grid-cols-1 gap-4">
           {projects.map((project) => (
@@ -31,11 +37,24 @@ export default function Projects() {
                 <h2 className="text-xl font-semibold text-black transition hover:text-gray-700 dark:text-white dark:hover:text-gray-300">
                   <Link href={`/projects/${project.slug}`}>{project.title}</Link>
                 </h2>
-                <span
-                  className={`rounded-full px-3 py-1 text-xs font-semibold ${statusClassMap[project.status]}`}
-                >
-                  {project.status}
-                </span>
+                <div className="flex items-center gap-2">
+                  <button
+                    type="button"
+                    onClick={() => toggleBookmark(project.slug)}
+                    className="rounded-full border border-gray-200 px-3 py-1 text-xs font-semibold text-gray-700 transition hover:border-gray-300 hover:text-black dark:border-gray-700 dark:text-gray-200 dark:hover:border-gray-500 dark:hover:text-white"
+                    aria-pressed={isBookmarked(project.slug)}
+                    aria-label={`${isBookmarked(project.slug) ? 'Hapus' : 'Simpan'} bookmark ${
+                      project.title
+                    }`}
+                  >
+                    {isBookmarked(project.slug) ? 'Tersimpan' : 'Bookmark'}
+                  </button>
+                  <span
+                    className={`rounded-full px-3 py-1 text-xs font-semibold ${statusClassMap[project.status]}`}
+                  >
+                    {project.status}
+                  </span>
+                </div>
               </div>
 
               <p className="mb-4 text-gray-700 dark:text-gray-300">{project.description}</p>
