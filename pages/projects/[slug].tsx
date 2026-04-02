@@ -4,6 +4,7 @@ import { ParsedUrlQuery } from 'querystring';
 
 import Container from '@/components/Container';
 import Meta from '@/components/Meta';
+import useProjectBookmarks from '@/hooks/useProjectBookmarks';
 import { getProjectBySlug, projects, statusClassMap } from '@/libs/projects';
 
 type Params = ParsedUrlQuery & {
@@ -13,6 +14,9 @@ type Params = ParsedUrlQuery & {
 export default function ProjectDetailPage({
   project,
 }: InferGetStaticPropsType<typeof getStaticProps>) {
+  const { isBookmarked, toggleBookmark } = useProjectBookmarks();
+  const hasBookmark = isBookmarked(project.slug);
+
   return (
     <Container>
       <Meta
@@ -33,11 +37,21 @@ export default function ProjectDetailPage({
           <h1 className="text-3xl font-bold tracking-tight text-black dark:text-white md:text-5xl">
             {project.title}
           </h1>
-          <span
-            className={`rounded-full px-3 py-1 text-xs font-semibold ${statusClassMap[project.status]}`}
-          >
-            {project.status}
-          </span>
+          <div className="flex flex-wrap items-center gap-2">
+            <span
+              className={`rounded-full px-3 py-1 text-xs font-semibold ${statusClassMap[project.status]}`}
+            >
+              {project.status}
+            </span>
+            <button
+              type="button"
+              onClick={() => toggleBookmark(project.slug)}
+              aria-pressed={hasBookmark}
+              className="shrink-0 whitespace-nowrap rounded-full border border-gray-300 px-3 py-1 text-xs font-semibold text-gray-700 transition hover:border-gray-400 hover:text-black dark:border-gray-700 dark:text-gray-200 dark:hover:border-gray-500 dark:hover:text-white"
+            >
+              {hasBookmark ? 'Bookmarked' : 'Bookmark'}
+            </button>
+          </div>
         </div>
 
         <p className="mb-6 text-gray-700 dark:text-gray-300">{project.description}</p>
