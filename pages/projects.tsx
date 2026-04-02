@@ -41,7 +41,7 @@ export default function Projects() {
                   <button
                     type="button"
                     onClick={() => toggleBookmark(project.slug)}
-                    className="rounded-full border border-gray-200 px-3 py-1 text-xs font-semibold text-gray-700 transition hover:border-gray-300 hover:text-black dark:border-gray-700 dark:text-gray-200 dark:hover:border-gray-500 dark:hover:text-white"
+                    className="shrink-0 whitespace-nowrap rounded-full border border-gray-200 px-3 py-1 text-xs font-semibold text-gray-700 transition hover:border-gray-300 hover:text-black dark:border-gray-700 dark:text-gray-200 dark:hover:border-gray-500 dark:hover:text-white"
                     aria-pressed={isBookmarked(project.slug)}
                     aria-label={`${isBookmarked(project.slug) ? 'Hapus' : 'Simpan'} bookmark ${
                       project.title
