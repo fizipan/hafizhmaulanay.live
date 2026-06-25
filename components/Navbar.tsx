@@ -22,6 +22,7 @@ export default function Navbar() {
         <NavItem href="/articles" text="Articles" />
         <NavItem href="/projects" text="Projects" />
         <NavItem href="/about" text="About" />
+        <NavItem href="/contact" text="Contact" />
       </div>
       <button
         aria-label="Toggle Dark Mode"
